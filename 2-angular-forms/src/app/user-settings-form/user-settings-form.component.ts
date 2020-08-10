@@ -19,6 +19,13 @@ export class UserSettingsFormComponent implements OnInit {
     notes: null
   };
 
+  singleModel = 'On';
+  startDate: Date;
+  startTime: Date;
+  userRating = 0;
+  maxRating = 10;
+  isReadonly = false;
+
   //copying form data
   userSettings: UserSettings = { ...this.originalUserSettings };
   postError = false;
@@ -29,6 +36,9 @@ export class UserSettingsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscriptionTypes = this.dataService.getSubscriptionTypes();
+
+    this.startDate = new Date();
+    this.startTime = new Date();
   }
 
   onHttpError(errorResponse: any) {
@@ -47,7 +57,7 @@ export class UserSettingsFormComponent implements OnInit {
 
     this.dataService.postUserSettingsForm(this.userSettings).subscribe(
       result => console.log(`success: ${result}.`),
-      error => onHttpError(error)
+      error => this.onHttpError(error)
       // error => console.log(`error: ${error}.`)
     );
   }
