@@ -1,6 +1,6 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 
-let num = 1;
+const num = 1;
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ let num = 1;
 export class AppComponent {
   title = 'my-app';
 
-  sayHello() {
-    var x = 10;
+  sayHello(): void {
+    const x = 10;
   }
 }
