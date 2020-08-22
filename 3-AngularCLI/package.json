@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "stats": "npx webpack-bundle-analyzer dist/my-app/stats.json",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
