@@ -7,7 +7,11 @@ import { Component } from '@angular/core';
     <div>
       <h1>Uncoming Angular Events</h1>
     </div>
-    <event-thumbnail [event]="event1"></event-thumbnail>
+    <event-thumbnail [event]="event1"
+    (eventClick)="handleEventClicked($event)"
+    #thumbnail
+    ></event-thumbnail>
+    <button class="btn btn-primary" (click)="thumbnail.logFoo()">log some foo</button>
   `
 })
 export class EventsListComponent {
@@ -25,5 +29,9 @@ export class EventsListComponent {
       city: 'London',
       country: 'England'
     }
+  };
+
+  handleEventClicked(data) {
+    console.log(`event: ${data}`);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, Output, EventEmitter } from '@angular/core'
 
 @Component({
   selector: 'event-thumbnail',
@@ -19,6 +19,7 @@ import { Component, Input } from '@angular/core'
       <div *ngIf="event?.onlineUrl">
         Online URL: {{event?.onlineUrl}}
       </div>
+      <button class="btn btn-primary" (click)="handleClickMe()">Click me!</button>
     </div>
   `,
   styles: [`
@@ -30,9 +31,19 @@ import { Component, Input } from '@angular/core'
 export class EventThumbnailComponent {
   @Input() event:any
 
+  @Output() eventClick = new EventEmitter();
+
   getStartTimeStyle():any {
     if (this.event && this.event.time === '8:00 am')
       return {color: '#003300', 'font-weight': 'bold'}
     return {}
+  }
+
+  handleClickMe() {
+    this.eventClick.emit(this.event.name);
+  }
+
+  logFoo() {
+    console.log(`foo`);
   }
 }
