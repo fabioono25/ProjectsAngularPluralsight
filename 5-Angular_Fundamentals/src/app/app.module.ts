@@ -1,3 +1,4 @@
+import { NavBarComponent } from './nav/navbar.component';
 import { EventThumbnailComponent } from './event-thumbnail.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -9,7 +10,8 @@ import { EventsListComponent } from './events-list.component';
   declarations: [
     EventsAppComponent,
     EventsListComponent,
-    EventThumbnailComponent
+    EventThumbnailComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule
