@@ -1,42 +1,21 @@
-import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs'
 
-@Component({
-  //selector: 'events-list',
-  //templateUrl: './events-list.component.html'
-  template: `
-    <div>
-      <h1>Uncoming Angular Events</h1>
-    </div>
-    <!-- <event-thumbnail [event]="event1"
-    (eventClick)="handleEventClicked($event)"
-    #thumbnail
-    ></event-thumbnail>
-    <button class="btn btn-primary" (click)="thumbnail.logFoo()">log some foo</button> -->
-    <div class="row">
-      <div class="col-md-5" *ngFor="let event of events">
-        <event-thumbnail [event]="event"
-        ></event-thumbnail>
-      </div>
-    </div>
-  `
-})
-export class EventsListComponent {
-  title = 'app';
+@Injectable()
+export class EventService {
+  getEvents() {
+    let subject = new Subject()
+    setTimeout(() => {subject.next(EVENTS); subject.complete(); },
+      100)
+    return subject
+  }
 
-  // event1 = {
-  //   id: 1,
-  //   name: 'Angular Connect',
-  //   date: '9/26/2036',
-  //   time: '10:00 am',
-  //   price: 599.99,
-  //   imageUrl: '/assets/images/angularconnect-shield.png',
-  //   location: {
-  //     address: '1057 DT',
-  //     city: 'London',
-  //     country: 'England'
-  //   }
-  // };
-  events = [
+  getEvent(id: number) {
+    return EVENTS.find(event => event.id === id)
+  }
+}
+
+const EVENTS = [
     {
       id: 1,
       name: 'Angular Connect',
@@ -122,11 +101,7 @@ export class EventsListComponent {
       time: '9:00 am',
       price: 950.00,
       imageUrl: '/assets/images/ng-nl.png',
-      location: {
-        address: 'The NG-NL Convention Center & Scuba Shop',
-        city: 'Amsterdam',
-        country: 'Netherlands'
-      },
+      onlineUrl: 'http://ng-nl.org/',
       sessions: [
         {
           id: 1,
@@ -346,8 +321,3 @@ export class EventsListComponent {
       ]
     }
   ]
-
-  handleEventClicked(data) {
-    console.log(`event: ${data}`);
-  }
-}
