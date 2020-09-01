@@ -11,6 +11,7 @@ import { EventsListComponent } from './events-list.component';
 import { RouterModule } from '@angular/router';
 import { EventDetailsComponent, EventRouteActivator } from './events/event-details';
 import { Error404Component } from './errors/404.component';
+import { EventListResolver } from './events-list-resolver.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { Error404Component } from './errors/404.component';
   providers: [
                 EventRouteActivator,
                 EventService, //{ provide: EventService, useValue: EventService } //long form
-                { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState } //long form
+                { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState }, //long form
+                EventListResolver
              ],
   bootstrap: [EventsAppComponent]
 })
