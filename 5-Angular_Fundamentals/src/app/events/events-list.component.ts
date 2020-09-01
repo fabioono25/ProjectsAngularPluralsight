@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 //import { ToastrService } from '../common/toastr.service'
 import { ActivatedRoute } from '@angular/router'
-import { EventService } from './events/shared';
+import { EventService } from './shared';
 
 //declare let toastr
 
