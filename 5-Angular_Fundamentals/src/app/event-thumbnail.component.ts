@@ -19,7 +19,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
       <div *ngIf="event?.onlineUrl">
         Online URL: {{event?.onlineUrl}}
       </div>
-      <button class="btn btn-primary" (click)="handleClickMe()">Click me!</button>
+      <!-- <button class="btn btn-primary" (click)="handleClickMe()">Click me!</button> -->
     </div>
   `,
   styles: [`
