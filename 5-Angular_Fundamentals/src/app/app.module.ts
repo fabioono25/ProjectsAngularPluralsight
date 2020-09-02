@@ -1,3 +1,4 @@
+import { AuthService } from './user/auth.service';
 import { appRoutes } from './routes';
 import { NavBarComponent } from './nav/navbar.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -33,7 +34,8 @@ import { EventsListComponent,
                 EventRouteActivator,
                 EventService, //{ provide: EventService, useValue: EventService } //long form
                 { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState }, //long form
-                EventListResolver
+                EventListResolver,
+                AuthService
              ],
   bootstrap: [EventsAppComponent]
 })
