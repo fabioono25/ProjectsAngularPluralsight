@@ -16,6 +16,7 @@ import { EventsListComponent,
          CreateEventComponent,
          EventRouteActivator,
          EventListResolver } from './events/index';
+import { SessionListComponent } from './events/event-details/session-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EventsListComponent,
     CreateEventComponent,
     Error404Component,
     NavBarComponent,
-    CreateSessionComponent
+    CreateSessionComponent,
+    SessionListComponent
   ],
   imports: [
     BrowserModule,
