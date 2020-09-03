@@ -17,6 +17,7 @@ import { EventsListComponent,
          EventRouteActivator,
          EventListResolver } from './events/index';
 import { SessionListComponent } from './events/event-details/session-list.component';
+import { CollapsibleWellComponent } from './common/collapsible-well.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SessionListComponent } from './events/event-details/session-list.compon
     Error404Component,
     NavBarComponent,
     CreateSessionComponent,
-    SessionListComponent
+    SessionListComponent,
+    CollapsibleWellComponent
   ],
   imports: [
     BrowserModule,
