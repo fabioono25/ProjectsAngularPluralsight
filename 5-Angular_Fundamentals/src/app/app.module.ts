@@ -11,16 +11,20 @@ import { NgModule } from '@angular/core';
 
 import { EventsAppComponent } from './events-app.component';
 import { RouterModule } from '@angular/router';
-import { EventDetailsComponent, CreateSessionComponent } from './events/event-details';
 import { Error404Component } from './errors/404.component';
 
-import { EventsListComponent,
+import { CreateSessionComponent,
+         EventsListComponent,
+         EventDetailsComponent,
          EventThumbnailComponent,
          EventService,
          CreateEventComponent,
          EventRouteActivator,
          EventListResolver,
-         DurationPipe } from './events/index';
+         DurationPipe,
+         VoterService,
+         UpvoteComponent,
+         LocationValidator} from './events/index';
 import { SessionListComponent } from './events/event-details/session-list.component';
 
 //declare let toastr: Toastr;
@@ -38,10 +42,12 @@ let jQuery = window['$'];
     NavBarComponent,
     CreateSessionComponent,
     SessionListComponent,
+    UpvoteComponent,
     CollapsibleWellComponent,
     DurationPipe,
     ModalTriggerDirective,
-    SimpleModalComponent
+    SimpleModalComponent,
+    LocationValidator
   ],
   imports: [
     BrowserModule,
@@ -63,7 +69,8 @@ let jQuery = window['$'];
                 EventService, //{ provide: EventService, useValue: EventService } //long form
                 { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState }, //long form
                 EventListResolver,
-                AuthService
+                AuthService,
+                VoterService
              ],
   bootstrap: [EventsAppComponent]
 })

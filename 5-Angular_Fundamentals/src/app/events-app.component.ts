@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <nav-bar></nav-bar>
     <!-- <events-list></events-list> -->
-    <img src="/assets/images/basic-shield.png"/>
+    <!-- <img src="/assets/images/basic-shield.png"/> -->
     <router-outlet></router-outlet>
   `
 })
