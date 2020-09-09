@@ -2,7 +2,7 @@ import { SimpleModalComponent } from './common/simpleModal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './user/auth.service';
 
-import { JQ_TOKEN, TOASTR_TOKEN, Toastr, CollapsibleWellComponent} from './common/index';
+import { JQ_TOKEN, TOASTR_TOKEN, Toastr, CollapsibleWellComponent, ModalTriggerDirective} from './common/index';
 
 import { appRoutes } from './routes';
 import { NavBarComponent } from './nav/navbar.component';
@@ -40,6 +40,7 @@ let jQuery = window['$'];
     SessionListComponent,
     CollapsibleWellComponent,
     DurationPipe,
+    ModalTriggerDirective,
     SimpleModalComponent
   ],
   imports: [

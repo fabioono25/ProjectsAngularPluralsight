@@ -1,7 +1,7 @@
 import { IEvent, ISession } from '../shared/index';
 import { Component } from '@angular/core'
 import { EventService } from '../shared/event.service'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Params } from '@angular/router'
 
 @Component({
   selector: 'event-details',
@@ -23,7 +23,15 @@ export class EventDetailsComponent {
   }
 
   ngOnInit() {
-    this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
+    //only work first time... when searching, it's a problem
+    //this.event = this.eventService.getEvent(+this.route.snapshot.params['id']); //snapshot is not observable
+
+    //reset states so we can react to changes directly in this component
+    //this allows in this case to route a component to itself
+    this.route.params.forEach((params: Params) => {
+      this.event = this.eventService.getEvent(+params['id']); //reseting the event property
+      this.addMode = false;
+    })
   }
 
   addSession() {
