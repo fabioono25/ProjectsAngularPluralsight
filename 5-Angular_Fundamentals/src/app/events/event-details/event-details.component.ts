@@ -28,10 +28,16 @@ export class EventDetailsComponent {
 
     //reset states so we can react to changes directly in this component
     //this allows in this case to route a component to itself
-    this.route.params.forEach((params: Params) => {
-      this.event = this.eventService.getEvent(+params['id']); //reseting the event property
-      this.addMode = false;
-    })
+    //this.route.params.forEach((params: Params) => {
+      //this.event = this.eventService.getEvent(+params['id']); //reseting the event property
+      //this.eventService.getEvent(+params['id']).subscribe((event: IEvent) => {
+    //     this.event = this.route.snapshot.data['event'];
+    //     this.addMode = false;
+    // });
+    this.route.data.forEach((data) => {
+      this.event = data['event'];
+        this.addMode = false;
+    });
   }
 
   addSession() {

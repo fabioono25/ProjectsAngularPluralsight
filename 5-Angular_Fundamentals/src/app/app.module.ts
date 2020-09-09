@@ -2,7 +2,7 @@ import { SimpleModalComponent } from './common/simpleModal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './user/auth.service';
 
-import { JQ_TOKEN, TOASTR_TOKEN, Toastr, CollapsibleWellComponent, ModalTriggerDirective} from './common/index';
+import { JQ_TOKEN, TOASTR_TOKEN, Toastr, CollapsibleWellComponent} from './common/index';
 
 import { appRoutes } from './routes';
 import { NavBarComponent } from './nav/navbar.component';
@@ -24,10 +24,12 @@ import { CreateSessionComponent,
          DurationPipe,
          VoterService,
          UpvoteComponent,
-         LocationValidator} from './events/index';
+         LocationValidator,
+         EventResolver} from './events/index';
 import { SessionListComponent } from './events/event-details/session-list.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ModalTriggerDirective } from './common/modalTrigger.directive';
 
 //declare let toastr: Toastr;
 let toastr: Toastr = window['toastr'];
@@ -60,9 +62,10 @@ let jQuery = window['$'];
   ],
   providers: [
                 //EventRouteActivator,
-                {
-                  provide: EventRouteActivator, useClass: EventRouteActivator
-                },
+                // {
+                //   provide: EventRouteActivator, useClass: EventRouteActivator
+                // },
+                EventResolver,
                 {
                   provide: TOASTR_TOKEN, useValue: toastr
                 },
