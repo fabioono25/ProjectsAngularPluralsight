@@ -27,6 +27,8 @@ import { CreateSessionComponent,
          LocationValidator} from './events/index';
 import { SessionListComponent } from './events/event-details/session-list.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 //declare let toastr: Toastr;
 let toastr: Toastr = window['toastr'];
 let jQuery = window['$'];
@@ -53,7 +55,8 @@ let jQuery = window['$'];
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   providers: [
                 //EventRouteActivator,
