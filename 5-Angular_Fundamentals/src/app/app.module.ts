@@ -58,6 +58,7 @@ const jQuery = window['$'];
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
+    // RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }), //get all modules preloaded
     HttpClientModule
   ],
   providers: [
