@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IEvent } from './shared/index';
 
 @Component({
@@ -30,14 +30,14 @@ import { IEvent } from './shared/index';
   `]
 })
 export class EventThumbnailComponent {
-  @Input() event:IEvent;
+  @Input() event: IEvent;
 
   @Output() eventClick = new EventEmitter();
 
-  getStartTimeStyle():any {
+  getStartTimeStyle(): any {
     if (this.event && this.event.time === '8:00 am')
-      return {color: '#003300', 'font-weight': 'bold'}
-    return {}
+      return {color: '#003300', 'font-weight': 'bold'};
+    return {};
   }
 
   handleClickMe() {

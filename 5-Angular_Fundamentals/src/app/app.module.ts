@@ -32,8 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalTriggerDirective } from './common/modalTrigger.directive';
 
 //declare let toastr: Toastr;
-let toastr: Toastr = window['toastr'];
-let jQuery = window['$'];
+const toastr: Toastr = window['toastr'];
+const jQuery = window['$'];
 
 @NgModule({
   declarations: [
