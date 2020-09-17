@@ -1,7 +1,9 @@
+import { of } from 'rxjs';
 import { HeroesComponent } from './heroes.component';
 describe('HeroesComponent', () => {
   let component: HeroesComponent;
   let HEROES;
+  let mockHeroService;
 
   beforeEach(() => {
     HEROES = [
@@ -10,39 +12,59 @@ describe('HeroesComponent', () => {
       {id: 3, name: 'Super Man', strength: 10}
     ];
 
-    component = new HeroesComponent();
+    mockHeroService = jasmine.createSpyObj(['getHeroes', 'addHero', 'deleteHero']);
+
+    component = new HeroesComponent(mockHeroService);
   });
 
-  it('should have no messages to start', () => {
-    // arrange
-    service = new MessageService();
+  describe('delete', () => {
+    it('should remove the indicated here from the heroes list', () => {
+      // arrange
+      mockHeroService.deleteHero.and.returnValue(of(true));
+      component.heroes = HEROES;
 
-    // assert
-    expect(service.messages.length).toBe(0);
+      // act
+      component.delete(HEROES[2]);
+
+      // assert
+      expect(component.heroes.length).toBe(2);
+    });
+
+    it('should call deleteHero (interaction test)', () => {
+      // arrange
+      mockHeroService.deleteHero.and.returnValue(of(true));
+      component.heroes = HEROES;
+      // component.ngOnInit(); - could be use this approach instead of the lines above
+
+      // act
+      component.delete(HEROES[2]);
+
+      // assert
+      expect(mockHeroService.deleteHero).toHaveBeenCalled();
+    });
+
+    it('should call deleteHero with the correct value', () => {
+      // arrange
+      mockHeroService.deleteHero.and.returnValue(of(true));
+      component.heroes = HEROES;
+      // component.ngOnInit(); - could be use this approach instead of the lines above
+
+      // act
+      component.delete(HEROES[2]);
+
+      // assert
+      expect(mockHeroService.deleteHero).toHaveBeenCalledWith(HEROES[2]);
+    });
   });
 
-  it('should add a message when add is called', () => {
-
+  xit('skipped test', () => {
     // arrange
-    service = new MessageService();
+    component.ngOnInit();
 
     // act
-    service.add('message1');
+    component.delete(HEROES[2]);
 
     // assert
-    expect(service.messages.length).toBe(1);
-  });
-
-  it('should remove all messages when clear is called', () => {
-
-    // arrange
-    service = new MessageService();
-    service.add('message1');
-
-    // act
-    service.clear();
-
-    // assert
-    expect(service.messages.length).toBe(0);
+    expect(mockHeroService.deleteHero).toHaveBeenCalled();
   });
 });
