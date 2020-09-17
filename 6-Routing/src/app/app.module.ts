@@ -20,7 +20,7 @@ import { MessageModule } from './messages/message.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
+    InMemoryWebApiModule.forRoot(ProductData, { delay: 500 }),
     ProductModule,
     UserModule,
     MessageModule,
