@@ -23,7 +23,7 @@ import { MessageModule } from './messages/message.module';
     BrowserAnimationsModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
-    ProductModule,
+    // ProductModule,
     UserModule,
     MessageModule,
     AppRoutingModule

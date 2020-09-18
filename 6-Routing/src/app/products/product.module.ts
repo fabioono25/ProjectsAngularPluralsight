@@ -16,10 +16,10 @@ import { ProductListResolver } from './product-list-resolver.service';
   imports: [
     SharedModule,
     RouterModule.forChild([
-      {
-        path: 'products',
-        canActivate: [AuthGuard],
-        children: [
+      //{
+        // path: 'products',
+        // canActivate: [AuthGuard],
+        // children: [
           { path: '', component: ProductListComponent, resolve: { resolvedData: ProductListResolver } },
           { path: ':id', component: ProductDetailComponent, resolve: { resolvedData: ProductResolver } },
           {
@@ -38,8 +38,8 @@ import { ProductListResolver } from './product-list-resolver.service';
               }
             ]
           }
-        ]
-      },
+      //   ]
+      // },
     ])
   ],
   declarations: [
