@@ -1,3 +1,4 @@
+import { AuthGuard } from './../user/auth.guard';
 import { ProductEditTagsComponent } from './product-edit/product-edit-tags.component';
 import { ProductEditInfoComponent } from './product-edit/product-edit-info.component';
 import { ProductResolver } from './product-resolver.service';
@@ -17,6 +18,7 @@ import { ProductListResolver } from './product-list-resolver.service';
     RouterModule.forChild([
       {
         path: 'products',
+        canActivate: [AuthGuard],
         children: [
           { path: '', component: ProductListComponent, resolve: { resolvedData: ProductListResolver } },
           { path: ':id', component: ProductDetailComponent, resolve: { resolvedData: ProductResolver } },
