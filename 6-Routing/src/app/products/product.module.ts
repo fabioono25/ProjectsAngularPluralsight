@@ -9,6 +9,7 @@ import { ProductDetailComponent } from './product-detail.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 
 import { SharedModule } from '../shared/shared.module';
+import { ProductListResolver } from './product-list-resolver.service';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { SharedModule } from '../shared/shared.module';
       {
         path: 'products',
         children: [
-          { path: '', component: ProductListComponent },
+          { path: '', component: ProductListComponent, resolve: { resolvedData: ProductListResolver } },
           { path: ':id', component: ProductDetailComponent, resolve: { resolvedData: ProductResolver } },
           {
             path: ':id/edit',
