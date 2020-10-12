@@ -4,6 +4,7 @@ describe('MessageService', () => {
   let service: MessageService;
 
   beforeEach(() => {
+    // the idea is to be the more explicit possible
     // service = new MessageService();
   });
 

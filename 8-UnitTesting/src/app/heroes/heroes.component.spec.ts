@@ -46,7 +46,7 @@ describe('HeroesComponent', () => {
     it('should call deleteHero with the correct value', () => {
       // arrange
       mockHeroService.deleteHero.and.returnValue(of(true));
-      component.heroes = HEROES;
+      component.heroes = HEROES; // instead of calling ngOnInit
       // component.ngOnInit(); - could be use this approach instead of the lines above
 
       // act

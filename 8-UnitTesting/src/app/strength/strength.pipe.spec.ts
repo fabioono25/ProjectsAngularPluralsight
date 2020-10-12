@@ -15,6 +15,6 @@ describe('StrengthPipe', () => {
     const val = pipe.transform(5);
 
     // assert
-    expect(val).toEqual('5 (Weak)');
+    expect(val).toEqual('5 (weak)');
   });
 });
