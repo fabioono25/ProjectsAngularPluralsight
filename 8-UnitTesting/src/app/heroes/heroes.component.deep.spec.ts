@@ -61,6 +61,7 @@ describe('HeroesComponent (deep tests)', () => {
     }
   });
 
+  // test for going from parent to child
   it(`should call heroService.deleteHero when the Hero Component's
     delete button is clicked`, () => {
       spyOn(fixture.componentInstance, 'delete');
@@ -69,7 +70,10 @@ describe('HeroesComponent (deep tests)', () => {
       fixture.detectChanges();
 
       const heroComponents = fixture.debugElement.queryAll(By.directive(HeroComponent));
-      // (<HeroComponent>heroComponents[0].componentInstance).delete.emit(undefined);
+
+      // heroComponents[0].query(By.css('button'))
+      //   .triggerEventHandler('click', { stopPropagation: () => {}});
+      // (<HeroComponent>heroComponents[0].componentInstance).delete.emit(undefined); - verify that the event is raised
       heroComponents[0].triggerEventHandler('delete', null);
 
       expect(fixture.componentInstance.delete).toHaveBeenCalledWith(HEROES[0]);
