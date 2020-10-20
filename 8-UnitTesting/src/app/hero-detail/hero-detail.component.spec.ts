@@ -37,24 +37,27 @@ describe('HeroDetailComponent', () => {
     expect(fixture.nativeElement.querySelector('h2').textContent).toContain('SUPERDUDE');
   });
 
-  // it('should call updateHero when save is called', fakeAsync(() => {
-  //   mockHeroService.updateHero.and.returnValue(of({}));
-  //   fixture.detectChanges();
+  // async can be used for Promises without a problem
+  it('should call updateHero when save is called', fakeAsync(() => {
+    mockHeroService.updateHero.and.returnValue(of({}));
+    fixture.detectChanges();
 
-  //   fixture.componentInstance.save();
-  //   flush();
+    fixture.componentInstance.save();
+    tick(250);
+    flush(); // look at the zone to verify the waiting tasks
 
-  //   expect(mockHeroService.updateHero).toHaveBeenCalled();
-  // }))
+    expect(mockHeroService.updateHero).toHaveBeenCalled();
+  }));
 
-  // it('should call updateHero when save is called', async(() => {
-  //   mockHeroService.updateHero.and.returnValue(of({}));
-  //   fixture.detectChanges();
+  // in the case of using Promises explicitally (always asynchronous)
+  it('should call updateHero when save is called', async(() => {
+    mockHeroService.updateHero.and.returnValue(of({}));
+    fixture.detectChanges();
 
-  //   fixture.componentInstance.save();
+    fixture.componentInstance.save();
 
-  //   fixture.whenStable().then(() => {
-  //     expect(mockHeroService.updateHero).toHaveBeenCalled();
-  //   });
-  // }))
-})
+    fixture.whenStable().then(() => {
+      expect(mockHeroService.updateHero).toHaveBeenCalled();
+    });
+  }));
+});
