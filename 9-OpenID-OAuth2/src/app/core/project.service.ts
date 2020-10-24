@@ -17,6 +17,7 @@ export class ProjectService {
                 private _authService: AuthService) { }
     
     getProjects(): Observable<Project[]> {
+        // verify if the user has a valid access token
         return from(this._authService.getAccessToken().then(token => {
             const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
             return this._httpClient.get<Project[]>(Constants.apiRoot + 'Projects', {headers: headers}).toPromise();

@@ -6,13 +6,13 @@ import { tap } from 'rxjs/operators';
 import { Constants } from '../constants';
 import { AuthService } from './auth-service.component';
 
-@Injectable()
+@Injectable() // not use the providedIn, because of the Interceptor being injected through core module
 export class AuthInterceptorService implements HttpInterceptor {
   constructor(private _authService: AuthService,
     private _router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.startsWith(Constants.apiRoot)) {
+    if (req.url.startsWith(Constants.apiRoot)) { // verify the origin of the requests
       return from(this._authService.getAccessToken().then(token => {
         const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
         const authReq = req.clone({ headers });
