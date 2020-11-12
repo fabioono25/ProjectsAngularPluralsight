@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
 import { Product } from '../product';
-import { ProductService } from '../product.service';
 import { GenericValidator } from '../../shared/generic-validator';
 import { NumberValidators } from '../../shared/number.validator';
 
 /* NgRx */
 import { Store } from '@ngrx/store';
-import { State, getCurrentProduct } from '../state/product.reducer';
-import * as ProductActions from '../state/product.actions';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { State, getCurrentProduct } from '../state';
+import { ProductPageActions } from '../state/actions';
 
 @Component({
   selector: 'pm-product-edit',
@@ -22,15 +22,14 @@ export class ProductEditComponent implements OnInit {
   errorMessage = '';
   productForm: FormGroup;
 
-  // product: Product | null;
+  product$: Observable<Product | null>;
 
   // Use with the generic validation message class
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
-  product$: Observable<Product | null>;
 
-  constructor(private store: Store<State>, private fb: FormBuilder, private productService: ProductService) {
+  constructor(private store: Store<State>, private fb: FormBuilder) {
 
     // Defines all of the validation messages for the form.
     // These could instead be retrieved from a file or database.
@@ -63,14 +62,10 @@ export class ProductEditComponent implements OnInit {
     });
 
     // Watch for changes to the currently selected product
-    // TODO: Unsubscribe
-    // this.store.select(getCurrentProduct).subscribe(
-    //   currentProduct => this.displayProduct(currentProduct)
-    // );
     this.product$ = this.store.select(getCurrentProduct)
-    .pipe(
-      tap(currentProduct => this.displayProduct(currentProduct))
-    );
+      .pipe(
+        tap(currentProduct => this.displayProduct(currentProduct))
+      );
 
     // Watch for value changes for validation
     this.productForm.valueChanges.subscribe(
@@ -85,9 +80,6 @@ export class ProductEditComponent implements OnInit {
   }
 
   displayProduct(product: Product | null): void {
-    // Set the local product property
-    // this.product = product;
-
     if (product) {
       // Reset the form back to pristine
       this.productForm.reset();
@@ -118,14 +110,11 @@ export class ProductEditComponent implements OnInit {
   deleteProduct(product: Product): void {
     if (product && product.id) {
       if (confirm(`Really delete the product: ${product.productName}?`)) {
-        this.productService.deleteProduct(product.id).subscribe({
-          next: () => this.store.dispatch(ProductActions.clearCurrentProduct()),
-          error: err => this.errorMessage = err
-        });
+        this.store.dispatch(ProductPageActions.deleteProduct({ productId: product.id }));
       }
     } else {
       // No need to delete, it was never saved
-      this.store.dispatch(ProductActions.clearCurrentProduct());
+      this.store.dispatch(ProductPageActions.clearCurrentProduct());
     }
   }
 
@@ -138,15 +127,9 @@ export class ProductEditComponent implements OnInit {
         const product = { ...originalProduct, ...this.productForm.value };
 
         if (product.id === 0) {
-          this.productService.createProduct(product).subscribe({
-            next: p => this.store.dispatch(ProductActions.setCurrentProduct({ currentProductId: p.id })),
-            error: err => this.errorMessage = err
-          });
+          this.store.dispatch(ProductPageActions.createProduct({ product }));
         } else {
-          this.productService.updateProduct(product).subscribe({
-            next: p => this.store.dispatch(ProductActions.setCurrentProduct({ currentProductId: p.id })),
-            error: err => this.errorMessage = err
-          });
+          this.store.dispatch(ProductPageActions.updateProduct({ product }));
         }
       }
     }
