@@ -1,3 +1,5 @@
+import { CoreModule } from './core/core.module';
+import { DataService } from 'app/services/data.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
 import { EditReaderComponent } from './edit-reader/edit-reader.component';
-import { LoggerService } from './services/logger.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,11 @@ import { LoggerService } from './services/logger.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    CoreModule,
+    HttpClientModule
   ],
-  providers: [],
+  // providers: [{provide: DataService, useFactory: dataServiceFactory, deps: [LoggerService]}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
