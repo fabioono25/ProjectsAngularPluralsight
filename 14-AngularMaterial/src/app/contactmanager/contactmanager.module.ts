@@ -1,3 +1,4 @@
+import { NotesComponent } from './components/notes/notes.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
@@ -36,6 +37,6 @@ const routes: Routes = [
   providers: [
     UserService
   ],
-  declarations: [ContactmanagerAppComponent, ToolbarComponent, MainContentComponent, SidenavComponent]
+  declarations: [ContactmanagerAppComponent, ToolbarComponent, MainContentComponent, SidenavComponent, NotesComponent]
 })
 export class ContactmanagerModule { }
